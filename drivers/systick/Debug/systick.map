@@ -1,0 +1,439 @@
+Archive member included because of file (symbol)
+
+d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/../../../../arm-none-eabi/lib/armv6-m\libcr_c.a(__weak__main.o)
+                              ./startup/cr_startup_lpc11.o (__main)
+d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/../../../../arm-none-eabi/lib/armv6-m\libcr_c.a(ctype.o)
+                              d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/../../../../arm-none-eabi/lib/armv6-m\libcr_c.a(__weak__main.o) (_ctype_init)
+d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/../../../../arm-none-eabi/lib/armv6-m\libcr_c.a(__init_alloc.o)
+                              d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/../../../../arm-none-eabi/lib/armv6-m\libcr_c.a(__weak__main.o) (_init_alloc)
+d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+                              ./cmsis/system_LPC11xx.o (__aeabi_uidiv)
+
+Allocating common symbols
+Common symbol       size              file
+
+__heaps             0x4               d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/../../../../arm-none-eabi/lib/armv6-m\libcr_c.a(__init_alloc.o)
+__end_of_heap       0x4               d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/../../../../arm-none-eabi/lib/armv6-m\libcr_c.a(__init_alloc.o)
+
+Discarded input sections
+
+ .text          0x00000000        0x0 ./startup/cr_startup_lpc11.o
+ .data          0x00000000        0x0 ./startup/cr_startup_lpc11.o
+ .bss           0x00000000        0x0 ./startup/cr_startup_lpc11.o
+ .text.SysTick_Handler
+                0x00000000        0x0 ./startup/cr_startup_lpc11.o
+ .text          0x00000000        0x0 ./src/systick_main.o
+ .data          0x00000000        0x0 ./src/systick_main.o
+ .bss           0x00000000        0x0 ./src/systick_main.o
+ .text          0x00000000        0x0 ./driver/crp.o
+ .data          0x00000000        0x0 ./driver/crp.o
+ .bss           0x00000000        0x0 ./driver/crp.o
+ .text          0x00000000        0x0 ./driver/small_gpio.o
+ .data          0x00000000        0x0 ./driver/small_gpio.o
+ .bss           0x00000000        0x0 ./driver/small_gpio.o
+ .rodata.IOCON_LUT
+                0x00000000        0x0 ./driver/small_gpio.o
+ .text          0x00000000        0x0 ./cmsis/core_cm0.o
+ .data          0x00000000        0x0 ./cmsis/core_cm0.o
+ .bss           0x00000000        0x0 ./cmsis/core_cm0.o
+ .text.__get_PSP
+                0x00000000        0x0 ./cmsis/core_cm0.o
+ .text.__set_PSP
+                0x00000000        0x0 ./cmsis/core_cm0.o
+ .text.__get_MSP
+                0x00000000        0x0 ./cmsis/core_cm0.o
+ .text.__set_MSP
+                0x00000000        0x0 ./cmsis/core_cm0.o
+ .text.__get_PRIMASK
+                0x00000000        0x0 ./cmsis/core_cm0.o
+ .text.__set_PRIMASK
+                0x00000000        0x0 ./cmsis/core_cm0.o
+ .text.__get_CONTROL
+                0x00000000        0x0 ./cmsis/core_cm0.o
+ .text.__set_CONTROL
+                0x00000000        0x0 ./cmsis/core_cm0.o
+ .text.__REV    0x00000000        0x0 ./cmsis/core_cm0.o
+ .text.__REV16  0x00000000        0x0 ./cmsis/core_cm0.o
+ .text.__REVSH  0x00000000        0x0 ./cmsis/core_cm0.o
+ .text          0x00000000        0x0 ./cmsis/system_LPC11xx.o
+ .data          0x00000000        0x0 ./cmsis/system_LPC11xx.o
+ .bss           0x00000000        0x0 ./cmsis/system_LPC11xx.o
+ .text          0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/../../../../arm-none-eabi/lib/armv6-m\libcr_c.a(__weak__main.o)
+ .data          0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/../../../../arm-none-eabi/lib/armv6-m\libcr_c.a(__weak__main.o)
+ .bss           0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/../../../../arm-none-eabi/lib/armv6-m\libcr_c.a(__weak__main.o)
+ .bss           0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/../../../../arm-none-eabi/lib/armv6-m\libcr_c.a(ctype.o)
+ .text          0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/../../../../arm-none-eabi/lib/armv6-m\libcr_c.a(__init_alloc.o)
+ .data          0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/../../../../arm-none-eabi/lib/armv6-m\libcr_c.a(__init_alloc.o)
+ .bss           0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/../../../../arm-none-eabi/lib/armv6-m\libcr_c.a(__init_alloc.o)
+ .text._start_module__init_alloc
+                0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/../../../../arm-none-eabi/lib/armv6-m\libcr_c.a(__init_alloc.o)
+ .text._end_module__init_alloc
+                0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/../../../../arm-none-eabi/lib/armv6-m\libcr_c.a(__init_alloc.o)
+ .text          0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+ .data          0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+ .bss           0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+ .text.__aeabi_lmul
+                0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+ .text.__aeabi_llsl
+                0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+ .text.__aeabi_llsr
+                0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+ .text.__aeabi_lasr
+                0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+ .text.__aeabi_lcmp
+                0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+ .text.__aeabi_ulcmp
+                0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+ .text.__aeabi_uread4
+                0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+ .text.__aeabi_uread8
+                0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+ .text.__aeabi_uwrite4
+                0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+ .text.__aeabi_uwrite8
+                0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+ .text.__aeabi_memcpy
+                0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+ .text.__aeabi_memcpy4
+                0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+ .text.__aeabi_memmove
+                0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+ .text.__aeabi_memmove4
+                0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+ .text.__aeabi_memset
+                0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+ .text.__aeabi_memset4
+                0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+ .text.__aeabi_memclr
+                0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+ .text.__aeabi_memclr4
+                0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+ .text.__aeabi_idiv
+                0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+ .text.__bhs_idivmod
+                0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+ .text.__aeabi_ldiv0
+                0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+ .text.__bhs_uldivmod
+                0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+ .text.__bhs_ldivmod
+                0x00000000        0x0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+MFlash32         0x00000000         0x00008000         xr
+RamLoc8          0x10000000         0x00002000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD ./startup/cr_startup_lpc11.o
+LOAD ./src/systick_main.o
+LOAD ./driver/crp.o
+LOAD ./driver/small_gpio.o
+LOAD ./cmsis/core_cm0.o
+LOAD ./cmsis/system_LPC11xx.o
+START GROUP
+LOAD d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/../../../../arm-none-eabi/lib/armv6-m\libcr_c.a
+LOAD d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/../../../../arm-none-eabi/lib/armv6-m\libcr_semihost.a
+LOAD d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a
+END GROUP
+                0x00008000                __top_MFlash32 = 0x8000
+                0x10002000                __top_RamLoc8 = 0x10002000
+
+.text           0x00000000      0xb00
+ FILL mask 0xff
+ *(.isr_vector)
+ .isr_vector    0x00000000       0xc0 ./startup/cr_startup_lpc11.o
+                0x00000000                g_pfnVectors
+ *(.text.Reset_Handler .text.SystemInit)
+ .text.SystemInit
+                0x000000c0       0xa8 ./cmsis/system_LPC11xx.o
+                0x000000c0                SystemInit
+                0x000002fc                . = 0x2fc
+ *fill*         0x00000168      0x194 ff
+ *(.crp)
+ .crp           0x000002fc        0x4 ./driver/crp.o
+                0x000002fc                CRP_WORD
+ *(.text*)
+ .text.ResetISR
+                0x00000300       0x64 ./startup/cr_startup_lpc11.o
+                0x00000300                ResetISR
+ .text.NMI_Handler
+                0x00000364        0x8 ./startup/cr_startup_lpc11.o
+                0x00000364                NMI_Handler
+ .text.HardFault_Handler
+                0x0000036c        0x8 ./startup/cr_startup_lpc11.o
+                0x0000036c                HardFault_Handler
+ .text.SVCall_Handler
+                0x00000374        0x8 ./startup/cr_startup_lpc11.o
+                0x00000374                SVCall_Handler
+ .text.PendSV_Handler
+                0x0000037c        0x8 ./startup/cr_startup_lpc11.o
+                0x0000037c                PendSV_Handler
+ .text.IntDefaultHandler
+                0x00000384        0x8 ./startup/cr_startup_lpc11.o
+                0x00000384                TIMER16_0_IRQHandler
+                0x00000384                UART_IRQHandler
+                0x00000384                TIMER32_0_IRQHandler
+                0x00000384                TIMER32_1_IRQHandler
+                0x00000384                IntDefaultHandler
+                0x00000384                PIOINT1_IRQHandler
+                0x00000384                CAN_IRQHandler
+                0x00000384                SSP0_IRQHandler
+                0x00000384                TIMER16_1_IRQHandler
+                0x00000384                ADC_IRQHandler
+                0x00000384                SSP1_IRQHandler
+                0x00000384                PIOINT2_IRQHandler
+                0x00000384                BOD_IRQHandler
+                0x00000384                WAKEUP_IRQHandler
+                0x00000384                PIOINT0_IRQHandler
+                0x00000384                I2C_IRQHandler
+                0x00000384                WDT_IRQHandler
+                0x00000384                PIOINT3_IRQHandler
+ .text.SysTick_Handler
+                0x0000038c       0x18 ./src/systick_main.o
+                0x0000038c                SysTick_Handler
+ .text.delaySysTick
+                0x000003a4       0x2c ./src/systick_main.o
+                0x000003a4                delaySysTick
+ .text.__WFI    0x000003d0        0xc ./src/systick_main.o
+ .text.main     0x000003dc       0x44 ./src/systick_main.o
+                0x000003dc                main
+ .text.SysTick_Config
+                0x00000420       0x50 ./src/systick_main.o
+ .text.NVIC_SetPriority
+                0x00000470       0xf0 ./src/systick_main.o
+ .text.SystemCoreClockUpdate
+                0x00000560      0x15c ./cmsis/system_LPC11xx.o
+                0x00000560                SystemCoreClockUpdate
+ .text.__weak_main
+                0x000006bc       0x14 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/../../../../arm-none-eabi/lib/armv6-m\libcr_c.a(__weak__main.o)
+                0x000006bc                __main
+                0x000006bc                __weak_main
+ .text          0x000006d0      0x338 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/../../../../arm-none-eabi/lib/armv6-m\libcr_c.a(ctype.o)
+                0x000006d0                _start_module_ctype
+                0x000007a4                islower
+                0x00000894                tolower
+                0x000007f4                ispunct
+                0x0000081c                isspace
+                0x000009fc                _end_module_ctype
+                0x0000086c                isxdigit
+                0x00000994                _ctype_init
+                0x00000844                isupper
+                0x00000704                isalpha
+                0x0000077c                isgraph
+                0x000006dc                isalnum
+                0x000007cc                isprint
+                0x00000914                _set_ctype_8859
+                0x00000754                isdigit
+                0x0000072c                iscntrl
+                0x000008d4                toupper
+ .text._init_alloc
+                0x00000a08       0x14 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/../../../../arm-none-eabi/lib/armv6-m\libcr_c.a(__init_alloc.o)
+                0x00000a08                _init_alloc
+ .text.__aeabi_idiv0
+                0x00000a1c        0x4 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+                0x00000a1c                __aeabi_idiv0
+ .text.__bhs_uidivmod
+                0x00000a20       0x88 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+                0x00000a20                __bhs_uidivmod
+ .text.__aeabi_uidiv
+                0x00000aa8       0x18 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+                0x00000aa8                __aeabi_uidiv
+ *(.rodata*)
+ .rodata.SystemCoreClockUpdate
+                0x00000ac0       0x40 ./cmsis/system_LPC11xx.o
+
+.glue_7         0x00000b00        0x0
+ .glue_7        0x00000000        0x0 linker stubs
+
+.glue_7t        0x00000b00        0x0
+ .glue_7t       0x00000000        0x0 linker stubs
+
+.vfp11_veneer   0x00000b00        0x0
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0x00000b00        0x0
+ .v4_bx         0x00000000        0x0 linker stubs
+
+.ARM.extab
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+                0x00000b00                __exidx_start = .
+
+.ARM.exidx
+ *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+                0x00000b00                __exidx_end = .
+                0x00000b00                _etext = .
+
+.data           0x10000000      0x208 load address 0x00000b00
+                0x10000000                _data = .
+ *(vtable)
+ *(.data*)
+ .data.SystemCoreClock
+                0x10000000        0x4 ./cmsis/system_LPC11xx.o
+                0x10000000                SystemCoreClock
+ .data          0x10000004      0x204 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/../../../../arm-none-eabi/lib/armv6-m\libcr_c.a(ctype.o)
+                0x10000004                __ctype
+                0x10000208                _edata = .
+
+.bss            0x10000208        0xc load address 0x00000d08
+                0x10000208                _bss = .
+ *(.bss*)
+ .bss.TimeTick  0x10000208        0x4 ./src/systick_main.o
+                0x10000208                TimeTick
+ *(COMMON)
+ COMMON         0x1000020c        0x8 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/../../../../arm-none-eabi/lib/armv6-m\libcr_c.a(__init_alloc.o)
+                0x1000020c                __heaps
+                0x10000210                __end_of_heap
+                0x10000214                _ebss = .
+
+.cr_heap        0x10000214        0x0 load address 0x00000d08
+                0x10000214                end = .
+                0x10000214                _pvHeapStart = .
+                0x10002000                _vRamTop = __top_RamLoc8
+                0x10002000                _vStackTop = _vRamTop
+OUTPUT(systick.axf elf32-littlearm)
+
+.debug_abbrev   0x00000000      0x79d
+ .debug_abbrev  0x00000000       0xbd ./startup/cr_startup_lpc11.o
+ .debug_abbrev  0x000000bd      0x172 ./src/systick_main.o
+ .debug_abbrev  0x0000022f       0x5a ./driver/crp.o
+ .debug_abbrev  0x00000289       0x6c ./driver/small_gpio.o
+ .debug_abbrev  0x000002f5       0xaf ./cmsis/core_cm0.o
+ .debug_abbrev  0x000003a4      0x126 ./cmsis/system_LPC11xx.o
+ .debug_abbrev  0x000004ca      0x2d3 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+
+.debug_info     0x00000000     0x1c11
+ .debug_info    0x00000000      0x1ae ./startup/cr_startup_lpc11.o
+ .debug_info    0x000001ae      0x461 ./src/systick_main.o
+ .debug_info    0x0000060f       0x95 ./driver/crp.o
+ .debug_info    0x000006a4       0xab ./driver/small_gpio.o
+ .debug_info    0x0000074f      0x2a3 ./cmsis/core_cm0.o
+ .debug_info    0x000009f2      0x561 ./cmsis/system_LPC11xx.o
+ .debug_info    0x00000f53      0xcbe d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+
+.debug_line     0x00000000     0x14e2
+ .debug_line    0x00000000      0x2e6 ./startup/cr_startup_lpc11.o
+ .debug_line    0x000002e6      0x33f ./src/systick_main.o
+ .debug_line    0x00000625      0x298 ./driver/crp.o
+ .debug_line    0x000008bd      0x2a6 ./driver/small_gpio.o
+ .debug_line    0x00000b63      0x30c ./cmsis/core_cm0.o
+ .debug_line    0x00000e6f      0x2f0 ./cmsis/system_LPC11xx.o
+ .debug_line    0x0000115f      0x383 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+
+.debug_macinfo  0x00000000    0x17abb
+ .debug_macinfo
+                0x00000000     0x2874 ./startup/cr_startup_lpc11.o
+ .debug_macinfo
+                0x00002874     0x4d71 ./src/systick_main.o
+ .debug_macinfo
+                0x000075e5     0x488d ./driver/crp.o
+ .debug_macinfo
+                0x0000be72     0x4d26 ./driver/small_gpio.o
+ .debug_macinfo
+                0x00010b98     0x2643 ./cmsis/core_cm0.o
+ .debug_macinfo
+                0x000131db     0x48e0 ./cmsis/system_LPC11xx.o
+
+.debug_frame    0x00000000      0x574
+ .debug_frame   0x00000000       0xd8 ./startup/cr_startup_lpc11.o
+ .debug_frame   0x000000d8       0xc8 ./src/systick_main.o
+ .debug_frame   0x000001a0       0xc0 ./cmsis/core_cm0.o
+ .debug_frame   0x00000260       0x44 ./cmsis/system_LPC11xx.o
+ .debug_frame   0x000002a4      0x2d0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+
+.debug_loc      0x00000000     0x1481
+ .debug_loc     0x00000000      0x139 ./startup/cr_startup_lpc11.o
+ .debug_loc     0x00000139      0x126 ./src/systick_main.o
+ .debug_loc     0x0000025f       0xbe ./cmsis/core_cm0.o
+ .debug_loc     0x0000031d      0x135 ./cmsis/system_LPC11xx.o
+ .debug_loc     0x00000452     0x102f d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+
+.debug_pubnames
+                0x00000000      0x42b
+ .debug_pubnames
+                0x00000000       0xa6 ./startup/cr_startup_lpc11.o
+ .debug_pubnames
+                0x000000a6       0x4d ./src/systick_main.o
+ .debug_pubnames
+                0x000000f3       0x1f ./driver/crp.o
+ .debug_pubnames
+                0x00000112       0x20 ./driver/small_gpio.o
+ .debug_pubnames
+                0x00000132       0xb4 ./cmsis/core_cm0.o
+ .debug_pubnames
+                0x000001e6       0x4f ./cmsis/system_LPC11xx.o
+ .debug_pubnames
+                0x00000235      0x1f6 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+
+.debug_aranges  0x00000000      0x218
+ .debug_aranges
+                0x00000000       0x50 ./startup/cr_startup_lpc11.o
+ .debug_aranges
+                0x00000050       0x48 ./src/systick_main.o
+ .debug_aranges
+                0x00000098       0x70 ./cmsis/core_cm0.o
+ .debug_aranges
+                0x00000108       0x28 ./cmsis/system_LPC11xx.o
+ .debug_aranges
+                0x00000130       0xe8 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+
+.debug_ranges   0x00000000      0x2d0
+ .debug_ranges  0x00000000       0x48 ./startup/cr_startup_lpc11.o
+ .debug_ranges  0x00000048       0x40 ./src/systick_main.o
+ .debug_ranges  0x00000088       0x68 ./cmsis/core_cm0.o
+ .debug_ranges  0x000000f0       0x20 ./cmsis/system_LPC11xx.o
+ .debug_ranges  0x00000110      0x1c0 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+
+.debug_str      0x00000000      0xa14
+ .debug_str     0x00000000      0x163 ./startup/cr_startup_lpc11.o
+                                0x197 (size before relaxing)
+ .debug_str     0x00000163      0x2ca ./src/systick_main.o
+                                0x3ae (size before relaxing)
+ .debug_str     0x0000042d       0x19 ./driver/crp.o
+                                 0xe7 (size before relaxing)
+ .debug_str     0x00000446       0x29 ./driver/small_gpio.o
+                                 0xee (size before relaxing)
+ .debug_str     0x0000046f       0xce ./cmsis/core_cm0.o
+                                0x1ac (size before relaxing)
+ .debug_str     0x0000053d      0x2b3 ./cmsis/system_LPC11xx.o
+                                0x3c0 (size before relaxing)
+ .debug_str     0x000007f0      0x224 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+                                0x29f (size before relaxing)
+
+.comment        0x00000000      0x1ae
+ .comment       0x00000000       0x2b ./startup/cr_startup_lpc11.o
+ .comment       0x0000002b       0x2b ./src/systick_main.o
+ .comment       0x00000056       0x2b ./driver/crp.o
+ .comment       0x00000081       0x2b ./driver/small_gpio.o
+ .comment       0x000000ac       0x2b ./cmsis/core_cm0.o
+ .comment       0x000000d7       0x2b ./cmsis/system_LPC11xx.o
+ .comment       0x00000102       0x2b d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/../../../../arm-none-eabi/lib/armv6-m\libcr_c.a(__weak__main.o)
+ .comment       0x0000012d       0x2b d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/../../../../arm-none-eabi/lib/armv6-m\libcr_c.a(ctype.o)
+ .comment       0x00000158       0x2b d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/../../../../arm-none-eabi/lib/armv6-m\libcr_c.a(__init_alloc.o)
+ .comment       0x00000183       0x2b d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)
+
+.ARM.attributes
+                0x00000000       0x31
+ .ARM.attributes
+                0x00000000       0x31 ./startup/cr_startup_lpc11.o
+ .ARM.attributes
+                0x00000031       0x31 ./src/systick_main.o
+ .ARM.attributes
+                0x00000062       0x31 ./driver/crp.o
+ .ARM.attributes
+                0x00000093       0x31 ./driver/small_gpio.o
+ .ARM.attributes
+                0x000000c4       0x31 ./cmsis/core_cm0.o
+ .ARM.attributes
+                0x000000f5       0x31 ./cmsis/system_LPC11xx.o
+ .ARM.attributes
+                0x00000126       0x30 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/../../../../arm-none-eabi/lib/armv6-m\libcr_c.a(__weak__main.o)
+ .ARM.attributes
+                0x00000156       0x30 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/../../../../arm-none-eabi/lib/armv6-m\libcr_c.a(ctype.o)
+ .ARM.attributes
+                0x00000186       0x30 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/../../../../arm-none-eabi/lib/armv6-m\libcr_c.a(__init_alloc.o)
+ .ARM.attributes
+                0x000001b6       0x30 d:/nxp/lpcxpresso_3.6_beta/tools/bin/../lib/gcc/arm-none-eabi/4.3.3/armv6-m\libcr_eabihelpers.a(rtlib.o)

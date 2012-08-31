@@ -1,0 +1,197 @@
+<project xmlns:xi="http://www.w3.org/2001/XInclude" 
+	type="Basic C project" name="${PARAM_project}" 
+	chip="${PARAM_chip}" vendor="${PARAM_vendor}">
+
+	<!-- define the default chip and vendor -->
+	<parameter name="PARAM_default_vendor" value="NXP" mode="hidden" />
+	<parameter name="PARAM_default_chip" value="LPC1114/301" mode="hidden" />
+	<parameter name="useCMSIS" value="true" mode="hidden" />
+	<parameter name="userSource" value="src" mode="hidden" />
+
+	<!-- Standard parameters visible to the user -->
+	<parameter description="Select options for this project" type="Title" />
+	<parameter name="useCrystal" 
+		description="Enable crystal oscillator" tip="An external crystal must be present for the part to start. Timing will be more precise" 
+		type="Checkbox" value="true" />
+	<parameter name="pllSetting" description="PLL Multiplier:" value="4,1,2,3,Off" type="combo" 
+		tip="Double-check settings. Invalid settings can disable reprogramming except via ISP" />
+	
+	<parameter description="Drivers, page 1" type="page" />
+	<parameter name="enaCRP" 		description="Enable CRP setup" 			type="Checkbox" value="true" 
+		tip="CRP settings can be changed in config/driver_config.h" />
+	<parameter name="enaADC" 		description="Enable ADC driver" 		type="Checkbox" value="false"
+		tip="Includes ADC driver in your new project" />
+	<parameter name="enaCAN" 		description="Enable CAN driver" 		type="Checkbox" value="false"
+		tip="Includes CAN driver in your new project" />
+	<parameter name="enaClkConfig" 	description="Enable ClkConfig driver" 	type="Checkbox" value="false"
+		tip="Includes Clock Configuration driver in your new project." />
+	<parameter name="enaDebugPrintf" description="Enable debug printf" 		type="Checkbox" value="false"
+		tip="Includes debug printf in your new project. You need lib_small_printf_m0 in your project." />
+	<parameter name="enaGPIO" 		description="Enable GPIO driver" 		type="Checkbox" value="true"
+		tip="Includes GPIO driver in your new project." />
+	<parameter name="enaI2C" 		description="Enable I2C master driver" 	type="Checkbox" value="false"
+		tip="Includes I2C Master driver in your new project." />
+	<parameter name="enaI2CSlave" 	description="Enable I2C slave driver" 	type="Checkbox" value="false"
+		tip="Includes I2C Slave driver in your new project." />
+	<parameter type="endPage" />
+	
+	<parameter description="Drivers, page 2" type="page" />
+	<parameter name="enaSWU" 		description="Enable software UART driver" type="Checkbox" value="false"
+		tip="Includes Software UART driver in your new project." />
+	<parameter name="enaROMCAN" 	description="Enable on-chip CAN driver" 	type="Checkbox" value="false"
+		tip="Includes hooks to ROM CAN driver in your new project." />
+	<parameter name="enaRS485"		description="Enable RS485 driver" 	type="Checkbox" value="false"
+		tip="Includes RS485 driver in your new project." />
+	<parameter name="enaSGPIO"		description="Enable small GPIO driver" 	type="Checkbox" value="false"
+		tip="Includes an alternate small GPIO driver in your new project." />
+	<parameter name="enaSSP"		description="Enable SSP/SPI driver" 	type="Checkbox" value="false"
+		tip="Includes an SSP driver in your new project." />
+	<parameter name="enaT16"		description="Enable 16-bit timer driver" 	type="Checkbox" value="false"
+		tip="Includes a 16-bit Timer driver in your new project." />
+	<parameter name="enaT32"		description="Enable 32-bit timer driver" 	type="Checkbox" value="true"
+		tip="Includes a 32-bit Timer driver in your new project." />
+	<parameter name="enaUART"		description="Enable UART driver" 	type="Checkbox" value="false"
+		tip="Includes a UART driver in your new project." />
+	<parameter name="enaWDT"		description="Enable watchdog timer driver" 	type="Checkbox" value="false"
+		tip="Includes a Watchdog Timer driver in your new project." />
+	<parameter type="endPage" />
+
+	<!-- Constant parameters (not displayed to user) -->
+	<!-- shorthand for chipname (1st 5 characters, converted to lowercase) -->
+	<parameter name="shortChip" value="${PARAM_chip@0,5,tolower}" mode="hidden" />
+	<parameter name="startup" value="${PARAM_chip@0,5,tolower}" mode="hidden" />
+	<parameter name="CMSIS_Version" value="CMSISv1p30_LPC11xx" mode="hidden" />
+
+<script>
+	<if test="${enaDebugPrintf}=true"> 
+	<requires msg="lib_small_printf_m0 can be found in the examples bundle for the ${shortChip} family">
+		<value>lib_small_printf_m0</value>
+	</requires>
+	</if>
+
+	<import src="${WIZARD_HOME}/System/NXP/lpc11/Common" dest="startup">
+		<include>{cr_startup_${startup}.(c|s|h)}</include>
+<!--		<settings>
+		<setting id="compiler.opt" buildType="Debug" path="startup">
+			<value>-O2</value>
+			<value>-OS</value>
+		</setting>
+		</settings> -->		
+	</import>
+
+	<import src="config" dest="config">
+		<include>{driver_config.h}</include>
+		<grep pattern="(CONFIG_ENABLE_DRIVER_CRP\s+)\d+" replace="$1${enaCRP?1:0}"></grep>
+		<grep pattern="(CONFIG_ENABLE_DRIVER_ADC\s+)\d+" replace="$1${enaADC?1:0}"></grep>
+		<grep pattern="(CONFIG_ENABLE_DRIVER_CAN\s+)\d+" replace="$1${enaCAN?1:0}"></grep>
+		<grep pattern="(CONFIG_ENABLE_DRIVER_CLKCONFIG\s+)\d+" replace="$1${enaClkConfig?1:0}"></grep>
+		<grep pattern="(CONFIG_ENABLE_DRIVER_PRINTF\s+)\d+" replace="$1${enaDebugPrintf?1:0}"></grep>
+		<grep pattern="(CONFIG_ENABLE_DRIVER_GPIO\s+)\d+" replace="$1${enaGPIO?1:0}"></grep>
+		<grep pattern="(CONFIG_ENABLE_DRIVER_I2C\s+)\d+" replace="$1${enaI2C?1:0}"></grep>
+		<grep pattern="(CONFIG_ENABLE_DRIVER_I2CSLAVE\s+)\d+" replace="$1${enaI2CSlave?1:0}"></grep>
+
+		<grep pattern="(CONFIG_ENABLE_DRIVER_SWUART\s+)\d+" replace="$1${enaSWU?1:0}"></grep>
+		<grep pattern="(CONFIG_ENABLE_DRIVER_ROMCAN\s+)\d+" replace="$1${enaROMCAN?1:0}"></grep>
+		<grep pattern="(CONFIG_ENABLE_DRIVER_RS485\s+)\d+" replace="$1${enaRS485?1:0}"></grep>
+		<grep pattern="(CONFIG_ENABLE_DRIVER_SMALLGPIO\s+)\d+" replace="$1${enaSGPIO?1:0}"></grep>
+		<grep pattern="(CONFIG_ENABLE_DRIVER_SSP\s+)\d+" replace="$1${enaSSP?1:0}"></grep>
+		<grep pattern="(CONFIG_ENABLE_DRIVER_TIMER16\s+)\d+" replace="$1${enaT16?1:0}"></grep>
+		<grep pattern="(CONFIG_ENABLE_DRIVER_TIMER32\s+)\d+" replace="$1${enaT32?1:0}"></grep>
+		<grep pattern="(CONFIG_ENABLE_DRIVER_UART\s+)\d+" replace="$1${enaUART?1:0}"></grep>
+		<grep pattern="(CONFIG_ENABLE_DRIVER_WDT\s+)\d+" replace="$1${enaWDT?1:0}"></grep>
+		<include>{target_config.h}</include>
+	</import>
+	<import src="config" dest="config">
+		<include>{system_LPC11xx.h}</include>
+		<grep pattern="(SYSPLLCLKSEL_Val\s+)[0-9a-fA-Fx]+" replace="$1${useCrystal?0x00000001:0x00000000}"></grep>
+		<if test="${pllSetting}=Off">
+			<grep pattern="(MAINCLKSEL_Val\s+)[0-9a-fA-Fx]+" replace="$10x00000001"></grep>
+		</if>
+		<if test="${pllSetting}=1">
+			<grep pattern="(SYSPLLCTRL_Val\s+)[0-9a-fA-Fx]+" replace="$10x00000060"></grep>
+		</if>
+		<if test="${pllSetting}=2">
+			<grep pattern="(SYSPLLCTRL_Val\s+)[0-9a-fA-Fx]+" replace="$10x00000041"></grep>
+		</if>
+		<if test="${pllSetting}=3">
+			<grep pattern="(SYSPLLCTRL_Val\s+)[0-9a-fA-Fx]+" replace="$10x00000042"></grep>
+		</if>
+		<if test="${pllSetting}=4">
+			<grep pattern="(SYSPLLCTRL_Val\s+)[0-9a-fA-Fx]+" replace="$10x00000023"></grep>
+		</if>
+	</import>
+	<import src="../common/" dest="driver">
+		<include>{type.h}</include>
+	</import>
+	
+	<if test="${enaCRP}=true">			<import src="../common/driver" dest="driver">	<include>{crp.(c|s|h)}</include></import></if>
+	<if test="${enaADC}=true">			<import src="../common/driver" dest="driver">	<include>{adc.(c|s|h)}</include></import></if>
+	<if test="${enaCAN}=true">			<import src="../common/driver" dest="driver">	<include>{can.(c|s|h)}</include></import></if>
+	<if test="${enaClkConfig}=true">	<import src="../common/driver" dest="driver">	<include>{clkconfig.(c|s|h)}</include></import></if>
+	<if test="${enaDebugPrintf}=true">	<import src="../common/driver" dest="driver">	<include>{debug_printf.(c|s|h)}</include></import></if>
+	<if test="${enaGPIO}=true">			<import src="../common/driver" dest="driver">	<include>{gpio.(c|s|h)}</include></import></if>
+	<if test="${enaI2C}=true">			<import src="../common/driver" dest="driver">	<include>{i2c.(c|s|h)}</include></import></if>
+	<if test="${enaI2CSlave}=true">		<import src="../common/driver" dest="driver">	<include>{i2cslave.(c|s|h)}</include></import></if>
+	<if test="${enaSWU}=true">			<import src="../common/driver" dest="driver">	<include>{lpc_swu.(c|s|h)}</include></import></if>
+	<if test="${enaROMCAN}=true">		<import src="../common/driver" dest="driver">	<include>{rom_drivers.(c|s|h)}</include></import></if>
+	<if test="${enaROMCAN}=true">		<import src="../common/driver" dest="driver">	<include>{rom_driver_CAN.(c|s|h)}</include></import></if>
+	<if test="${enaRS485}=true">		<import src="../common/driver" dest="driver">	<include>{rs485.(c|s|h)}</include></import></if>
+	<if test="${enaSGPIO}=true">		<import src="../common/driver" dest="driver">	<include>{small_gpio.(c|s|h)}</include></import></if>
+	<if test="${enaSSP}=true">			<import src="../common/driver" dest="driver">	<include>{ssp.(c|s|h)}</include></import></if>
+	<if test="${enaT16}=true">			<import src="../common/driver" dest="driver">	<include>{timer16.(c|s|h)}</include></import></if>
+	<if test="${enaT32}=true">			<import src="../common/driver" dest="driver">	<include>{timer32.(c|s|h)}</include></import></if>
+	<if test="${enaUART}=true">			<import src="../common/driver" dest="driver">	<include>{uart.(c|s|h)}</include></import></if>
+	<if test="${enaWDT}=true">			<import src="../common/driver" dest="driver">	<include>{wdt.(c|s|h)}</include></import></if>
+
+	<import src="../common/linker" dest="linker">
+	</import>
+	<import src="src" dest="src">
+	</import>
+	<import src="../common/cmsis" dest="cmsis">
+<!--		<setting id="compiler.opt" buildType="Debug" path="startup">
+			<value>-O2</value>
+			<value>-OS</value>
+		</setting> -->		
+	</import>
+	<settings>
+	<setting id="compiler.inc">
+		<value>${MacroStart}workspace_loc:/${PARAM_project}/cmsis${MacroEnd}</value>
+		<value>${MacroStart}workspace_loc:/${PARAM_project}/config${MacroEnd}</value>
+		<value>${MacroStart}workspace_loc:/${PARAM_project}/startup${MacroEnd}</value>
+		<value>${MacroStart}workspace_loc:/${PARAM_project}/driver${MacroEnd}</value>
+	</setting>
+	<if test="${enaDebugPrintf}=true"> 
+		<setting id="compiler.inc">
+			<value>${MacroStart}workspace_loc:/lib_small_printf_m0/inc${MacroEnd}</value>
+		</setting>
+		<setting id="linker.libs">
+			<value>lib_small_printf_m0</value>
+		</setting>
+		<setting id="linker.paths">
+			<value>${MacroStart}workspace_loc:/lib_small_printf_m0/Lib${MacroEnd}</value>
+		</setting>
+	</if>
+	<setting id="compiler.def">
+		<value>TARGET_SHORTCHIP=${shortChip}</value>
+		<value>TARGET_CHIP=${PARAM_chip}</value>
+		<value>__USE_CMSIS=1</value>
+	</setting>
+	<setting id="assembler.c.header">
+		<value>Redlib</value>
+	</setting>
+	<setting id="compiler.c.header">
+		<value>Redlib</value>
+	</setting>
+	<setting id="compiler.opt" buildType="Debug">
+		<value>-O0</value>
+	</setting>
+	<setting id="compiler.opt" buildType="Release">
+		<value>-O2</value>
+		<value>-OS</value>
+	</setting>
+	<setting id="linker.library.type">
+		<value>Redlib (semihost)</value>
+	</setting>
+	</settings> 
+</script>
+</project>
