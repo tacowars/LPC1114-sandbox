@@ -95,12 +95,15 @@ int main(void) {
 	UARTInit(UART_BAUD);
 
 	uint8_t bootmsg[] = "-- lil' ARM booted:\n";
-
+	UARTSend((uint8_t *)bootmsg,21);
 
 	while(1) {
-		LPC_GPIO0->DATA ^= (1<<3); /* toggle GPIOX_X */
-		Delay(1000);
-		UARTSend( (uint8_t *)bootmsg, 21 );
+		//Delay(1000);
+
+		LPC_UART->IER = IER_THRE | IER_RLS;			/* Disable RBR */
+		UARTSend( (uint8_t *)UARTBuffer, UARTCount );
+		UARTCount = 0;
+		LPC_UART->IER = IER_THRE | IER_RLS | IER_RBR;	/* Re-enable RBR */
 	}
 	return 0 ;
 }
