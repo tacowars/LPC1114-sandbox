@@ -100,10 +100,17 @@ int main(void) {
 	while(1) {
 		//Delay(1000);
 
-		LPC_UART->IER = IER_THRE | IER_RLS;			/* Disable RBR */
-		UARTSend( (uint8_t *)UARTBuffer, UARTCount );
-		UARTCount = 0;
-		LPC_UART->IER = IER_THRE | IER_RLS | IER_RBR;	/* Re-enable RBR */
+		if (UARTCount > 0) {
+			LPC_UART->IER = IER_THRE | IER_RLS;			/* Disable UART Interrupt Enable Register */
+			int i = 0;
+			for (i=0;UARTCount > 0;i++) {
+				UARTSend(UARTBuffer[i],1);
+				//UARTSend( (uint8_t *)UARTBuffer, UARTCount );
+			}
+			UARTSend( (uint8_t *)UARTBuffer, UARTCount );
+			UARTCount = 0;
+			LPC_UART->IER = IER_THRE | IER_RLS | IER_RBR;	/* Re-enable UART Interrupt Enable Register */
+		}
 	}
 	return 0 ;
 }
