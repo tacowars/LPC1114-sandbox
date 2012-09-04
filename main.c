@@ -118,10 +118,15 @@ void beatLight() {
 
 }
 
-void beatLightOff() {
-	LPC_TMR16B0->MR0 = 0; // (65000 / 1000) = 65
+void songStop() {
+	LPC_TMR16B0->MR0 = 0;
 	LPC_TMR16B0->MR1 = 0;
 	LPC_TMR16B0->MR2 = 0;
+	ClockTickCnt = 0; // reset clock start
+}
+
+void songStart() {
+	ClockTickCnt = 0; // reset clock start
 }
 
 
@@ -152,6 +157,7 @@ int main(void) {
 				case 0xfa:
 					LPC_GPIO0->DATA ^= (1<<3); /* toggle GPIOX_X */
 					UARTSend( (uint8_t *)UARTBuffer, 1 );
+					songStart();
 					UARTCount--;
 				  break;
 				case 0xf8:
@@ -162,7 +168,7 @@ int main(void) {
 				  break;
 				case 0xfc:
 					LPC_GPIO0->DATA &= ~(1<<3); /* clear GPIOX_X */
-					beatLightOff();
+					songStop();
 					UARTSend( (uint8_t *)UARTBuffer, 1 );
 					UARTCount--;
 				  break;
