@@ -24,6 +24,7 @@ __CRP const unsigned int CRP_WORD = CRP_NO_CRP ;
 volatile unsigned long SysTickCnt=0;      /* SysTick Counter                    */
 volatile unsigned long IRQTickCnt=0;      /* fast counter                    */
 volatile unsigned long ClockTickCnt=0;      /* beat counter                    */
+volatile unsigned long PWMTickCnt=0;      /* LED PWM counter                    */
 
 // UART
 extern volatile uint32_t UARTCount;
@@ -39,12 +40,15 @@ void SysTick_Handler (void) {           /* SysTick Interrupt Handler (~1ms)    *
 		IRQTickCnt = 0;
 	}
 	IRQTickCnt++;
-	uint16_t decr = 392;
 
+	if (PWMTickCnt >= 16) {
+		if (LPC_TMR16B0->MR0 >= 1 ) {LPC_TMR16B0->MR0 /= 1.41421356237;} else { LPC_TMR16B0->MR0 = 0;}
+		if (LPC_TMR16B0->MR1 >= 1 ) {LPC_TMR16B0->MR1 /= 1.41421356237;} else { LPC_TMR16B0->MR1 = 0;}
+		if (LPC_TMR16B0->MR2 >= 1 ) {LPC_TMR16B0->MR2 /= 1.41421356237;} else { LPC_TMR16B0->MR2 = 0;}
+		PWMTickCnt = 0;
+	}
+	PWMTickCnt++;
 
-	if (LPC_TMR16B0->MR0 >= decr ) {LPC_TMR16B0->MR0 -= decr;} else { LPC_TMR16B0->MR0 = 0;}
-	if (LPC_TMR16B0->MR1 >= decr ) {LPC_TMR16B0->MR1 -= decr;} else { LPC_TMR16B0->MR1 = 0;}
-	if (LPC_TMR16B0->MR2 >= decr ) {LPC_TMR16B0->MR2 -= decr;} else { LPC_TMR16B0->MR2 = 0;}
 }
 
 void Delay (unsigned long tick) {       /* Delay Function                     */
