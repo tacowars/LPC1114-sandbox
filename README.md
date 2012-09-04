@@ -2,7 +2,11 @@ LPC1114-school
 ==============
 sandbox for experiments and learnings
 
-sysTick timer too coarse for LED? timing is too short for 1ms decrement intervals?
+tried LUT for jitter, no effect. 
+Tried blocking interrupts, no go
+tried tuning frequency to just over 100HZ, no good.
+Is it the clock?
+
 
 
 MIDI Monitor with Python

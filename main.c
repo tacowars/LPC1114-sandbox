@@ -22,32 +22,46 @@ __CRP const unsigned int CRP_WORD = CRP_NO_CRP ;
 
 // SysTick Timer
 volatile unsigned long SysTickCnt=0;      /* SysTick Counter                    */
-volatile unsigned long IRQTickCnt=0;      /* fast counter                    */
 volatile unsigned long ClockTickCnt=0;      /* beat counter                    */
 volatile unsigned long PWMTickCnt=0;      /* LED PWM counter                    */
+volatile uint16_t LED0 = 0;
+volatile uint16_t LED1 = 0;
+volatile uint16_t LED2 = 0;
 
 // UART
 extern volatile uint32_t UARTCount;
 extern volatile uint8_t UARTBuffer[BUFSIZE];
 
-// TImer OSC
-volatile unsigned int Frequency = 65535; // lower is higher
+
+static uint16_t LEDcurve [] = {
+		65535, 46340, 32767, 23170, 16383, 11585, 8192, 5792, 4096, 2896, 2047, 1448, 1024, 724, 512,
+		362, 256, 181, 127, 90, 64, 45, 32, 23, 16, 11, 8, 6, 4, 3, 2, 1, 1
+};
 
 void SysTick_Handler (void) {           /* SysTick Interrupt Handler (~1ms)    */
 	SysTickCnt++;
-	if (IRQTickCnt >= 100) {
-		LPC_GPIO0->DATA ^= (1<<7); /* toggle GPIOX_X */
-		IRQTickCnt = 0;
-	}
-	IRQTickCnt++;
 
-	if (PWMTickCnt >= 16) {
-		if (LPC_TMR16B0->MR0 >= 1 ) {LPC_TMR16B0->MR0 /= 1.41421356237;} else { LPC_TMR16B0->MR0 = 0;}
-		if (LPC_TMR16B0->MR1 >= 1 ) {LPC_TMR16B0->MR1 /= 1.41421356237;} else { LPC_TMR16B0->MR1 = 0;}
-		if (LPC_TMR16B0->MR2 >= 1 ) {LPC_TMR16B0->MR2 /= 1.41421356237;} else { LPC_TMR16B0->MR2 = 0;}
+	if (PWMTickCnt >= 8) {
+		LPC_UART->IER = IER_THRE | IER_RLS;			/* Disable UART Interrupt Enable Register */
+//		if (LPC_TMR16B0->MR0 >= 1 ) {LPC_TMR16B0->MR0 /= 1.41421356237;} else { LPC_TMR16B0->MR0 = 0;}
+//		if (LPC_TMR16B0->MR1 >= 1 ) {LPC_TMR16B0->MR1 /= 1.41421356237;} else { LPC_TMR16B0->MR1 = 0;}
+//		if (LPC_TMR16B0->MR2 >= 1 ) {LPC_TMR16B0->MR2 /= 1.41421356237;} else { LPC_TMR16B0->MR2 = 0;}
+
+
+		LPC_TMR16B0->MR0 = LEDcurve[LED0];
+		LPC_TMR16B0->MR1 = LEDcurve[LED1];
+		LPC_TMR16B0->MR2 = LEDcurve[LED2];
+
+		if (LED0 < 32) {LED0++;}
+		if (LED1 < 32) {LED1++;}
+		if (LED2 < 32) {LED2++;}
+
 		PWMTickCnt = 0;
+		LPC_UART->IER = IER_THRE | IER_RLS | IER_RBR;	/* Re-enable UART Interrupt Enable Register */
 	}
 	PWMTickCnt++;
+
+
 
 }
 
@@ -86,40 +100,40 @@ void TMR16init() {
 	LPC_TMR16B0->PWMC |= 0b111; // 65535 16bit TOP 1800hz?
 
 	/* Set the PWM frequency */
+	unsigned int Frequency = 0xFFFF;
 	LPC_TMR16B0->MR3 = Frequency; // p.327 in UM
 	/* Set initial duty cycle */
-	LPC_TMR16B0->MR0 = Frequency / 10; // p.327 in UM
-	LPC_TMR16B0->MR1 = Frequency / 10;
-	LPC_TMR16B0->MR2 = Frequency / 10;
+	LPC_TMR16B0->MR0 = Frequency / 2; // p.327 in UM
+	LPC_TMR16B0->MR1 = Frequency / 2;
+	LPC_TMR16B0->MR2 = Frequency / 2;
 	/* TMR16B0MCR - Reset on MR3 p.330 in UM */
 	LPC_TMR16B0->MCR |= (1<<10); // Reset on MR3: the TC will be reset if MR3 matches it.
-	LPC_TMR16B0->PR = 10; // The 16-bit Prescale Register specifies the maximum value for the Prescale Counter.
+	LPC_TMR16B0->PR = 6; // The 16-bit Prescale Register specifies the maximum value for the Prescale Counter.
 	LPC_TMR16B0->PC = 2; // Prescale Counter register
 	/* Count Control Register (TMR16B0TCR - Start Timer16B0 p.329 in UM */
 	LPC_TMR16B0->TCR = 1;// |= (1<<1);
 }
 
-void playNote(uint8_t note) {
-	Frequency = 65000 - (note * 2500);
-
-	/* Set the PWM frequency */
-	LPC_TMR16B0->MR3 = Frequency; // p.327 in UM
-	/* Set initial duty cycle */
-	LPC_TMR16B0->MR0 = Frequency / 2; // p.327 in UM
-}
-
 void beatLight() {
+	LPC_UART->IER = IER_THRE | IER_RLS;			/* Disable UART Interrupt Enable Register */
 	if (ClockTickCnt == 0) {
-	LPC_TMR16B0->MR0 = 65000; // (65000 / 1000) = 65
-	LPC_TMR16B0->MR1 = 65000;
-	LPC_TMR16B0->MR2 = 65000;
+//	LPC_TMR16B0->MR0 = 0xFFFF;
+//	LPC_TMR16B0->MR1 = 0xFFFF;
+//	LPC_TMR16B0->MR2 = 0xFFFF;
+	LED0 = 0;
+	LED1 = 0;
+	LED2 = 0;
 	}
 	ClockTickCnt++;
-	if (ClockTickCnt == 24) {LPC_TMR16B0->MR0 = 65000;}
-	if (ClockTickCnt == 48) {LPC_TMR16B0->MR1 = 65000;}
-	if (ClockTickCnt == 72) {LPC_TMR16B0->MR2 = 65000;}
+	if (ClockTickCnt == 24) {LED0 = 0;}//LPC_TMR16B0->MR0 = 0xFFFF;}
+	if (ClockTickCnt == 48) {LED1 = 0;}//{LPC_TMR16B0->MR1 = 0xFFFF;}
+	if (ClockTickCnt == 72) {LED2 = 0;}//{LPC_TMR16B0->MR2 = 0xFFFF;}
 	if (ClockTickCnt == 96) {ClockTickCnt = 0;}
+	LPC_UART->IER = IER_THRE | IER_RLS | IER_RBR;	/* Re-enable UART Interrupt Enable Register */
+}
 
+void songStart() {
+	ClockTickCnt = 0; // reset clock start
 }
 
 void songStop() {
@@ -129,11 +143,6 @@ void songStop() {
 	ClockTickCnt = 0; // reset clock start
 }
 
-void songStart() {
-	ClockTickCnt = 0; // reset clock start
-}
-
-
 int main(void) {
 
 	SystemInit();
@@ -141,49 +150,47 @@ int main(void) {
 	LEDinit();
 	TMR16init();
 	UARTInit(UART_BAUD);
-
 	while(1) {
 		//Delay(1000);
 
-		if (UARTCount > 0) { // MIDI commands are 3 bytes
-			while (UARTCount > 0) {
-				LPC_UART->IER = IER_THRE | IER_RLS;			/* Disable UART Interrupt Enable Register */
-				switch ( *UARTBuffer ) {
-				case 0x90: // NOTE ON, CH0
-					if (UARTCount >= 3) { // wait for entire command
-						*UARTBuffer = *(UARTBuffer+1); // skip the first byte
-						UARTSend( (uint8_t *)UARTBuffer, 1 ); // send only note pitch
-						playNote(*UARTBuffer);
-						*UARTBuffer = *(UARTBuffer+1);
-						UARTCount-=3;
-					}
-				  break;
-				case 0xfa:
-					LPC_GPIO0->DATA ^= (1<<3); /* toggle GPIOX_X */
-					UARTSend( (uint8_t *)UARTBuffer, 1 );
-					songStart();
-					UARTCount--;
-				  break;
-				case 0xf8:
-					beatLight();
-					LPC_GPIO0->DATA ^= (1<<3); /* toggle GPIOX_X */
-					UARTSend( (uint8_t *)UARTBuffer, 1 );
-					UARTCount--;
-				  break;
-				case 0xfc:
-					LPC_GPIO0->DATA &= ~(1<<3); /* clear GPIOX_X */
-					songStop();
-					UARTSend( (uint8_t *)UARTBuffer, 1 );
-					UARTCount--;
-				  break;
-				default:
-					UARTSend( (uint8_t *)UARTBuffer, 1 );
-					UARTCount--;
-				  break;
-				}
-				LPC_UART->IER = IER_THRE | IER_RLS | IER_RBR;	/* Re-enable UART Interrupt Enable Register */
+		while (UARTCount > 0) {
+			LPC_UART->IER = IER_THRE | IER_RLS;			/* Disable UART Interrupt Enable Register */
+			switch ( *UARTBuffer ) {
+	//				case 0x90: // NOTE ON, CH0
+	//					if (UARTCount >= 3) { // wait for entire command
+	//						*UARTBuffer = *(UARTBuffer+1); // skip the first byte
+	//						UARTSend( (uint8_t *)UARTBuffer, 1 ); // send only note pitch
+	//						playNote(*UARTBuffer);
+	//						*UARTBuffer = *(UARTBuffer+1);
+	//						UARTCount-=3;
+	//					}
+	//				  break;
+			case 0xfa:
+				LPC_GPIO0->DATA ^= (1<<3); /* toggle GPIOX_X */
+				UARTSend( (uint8_t *)UARTBuffer, 1 );
+				songStart();
+				UARTCount--;
+			  break;
+			case 0xf8:
+				beatLight();
+				//LPC_GPIO0->DATA ^= (1<<3); /* toggle GPIOX_X */
+				//UARTSend( (uint8_t *)UARTBuffer, 1 );
+				*UARTBuffer = *(UARTBuffer+1);
+				UARTCount--;
+			  break;
+			case 0xfc:
+				LPC_GPIO0->DATA &= ~(1<<3); /* clear GPIOX_X */
+				songStop();
+				UARTSend( (uint8_t *)UARTBuffer, 1 );
+				UARTCount--;
+			  break;
+			default:
+				UARTSend( (uint8_t *)UARTBuffer, 1 );
+				UARTCount--;
+			  break;
 			}
+			LPC_UART->IER = IER_THRE | IER_RLS | IER_RBR;	/* Re-enable UART Interrupt Enable Register */
 		}
 	}
-	return 0 ;
+	return 0;
 }
