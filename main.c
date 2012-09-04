@@ -23,13 +23,14 @@ __CRP const unsigned int CRP_WORD = CRP_NO_CRP ;
 // SysTick Timer
 volatile unsigned long SysTickCnt=0;      /* SysTick Counter                    */
 volatile unsigned long IRQTickCnt=0;      /* fast counter                    */
+volatile unsigned long ClockTickCnt=0;      /* beat counter                    */
 
 // UART
 extern volatile uint32_t UARTCount;
 extern volatile uint8_t UARTBuffer[BUFSIZE];
 
 // TImer OSC
-volatile unsigned int Frequency = 65000; // lower is higher
+volatile unsigned int Frequency = 65535; // lower is higher
 
 void SysTick_Handler (void) {           /* SysTick Interrupt Handler (~1ms)    */
 	SysTickCnt++;
@@ -38,8 +39,12 @@ void SysTick_Handler (void) {           /* SysTick Interrupt Handler (~1ms)    *
 		IRQTickCnt = 0;
 	}
 	IRQTickCnt++;
+	uint16_t decr = 392;
 
 
+	if (LPC_TMR16B0->MR0 >= decr ) {LPC_TMR16B0->MR0 -= decr;} else { LPC_TMR16B0->MR0 = 0;}
+	if (LPC_TMR16B0->MR1 >= decr ) {LPC_TMR16B0->MR1 -= decr;} else { LPC_TMR16B0->MR1 = 0;}
+	if (LPC_TMR16B0->MR2 >= decr ) {LPC_TMR16B0->MR2 -= decr;} else { LPC_TMR16B0->MR2 = 0;}
 }
 
 void Delay (unsigned long tick) {       /* Delay Function                     */
@@ -74,18 +79,17 @@ void TMR16init() {
 	LPC_IOCON->SWCLK_PIO0_10 |= (6>>1); // enabling bit 1 sets match pin
 
 	/* Enable PWM function on all CT16B0_MATx pins */
-	LPC_TMR16B0->PWMC |= (2<<1); // 65535 16bit TOP 1800hz?
+	LPC_TMR16B0->PWMC |= 0b111; // 65535 16bit TOP 1800hz?
 
 	/* Set the PWM frequency */
 	LPC_TMR16B0->MR3 = Frequency; // p.327 in UM
 	/* Set initial duty cycle */
-	LPC_TMR16B0->MR0 = Frequency / 2; // p.327 in UM
-	LPC_TMR16B0->MR1 = Frequency / 2; // p.327 in UM
-
-	LPC_TMR16B0->MR2 = Frequency / 2; // p.327 in UM
+	LPC_TMR16B0->MR0 = Frequency / 10; // p.327 in UM
+	LPC_TMR16B0->MR1 = Frequency / 10;
+	LPC_TMR16B0->MR2 = Frequency / 10;
 	/* TMR16B0MCR - Reset on MR3 p.330 in UM */
 	LPC_TMR16B0->MCR |= (1<<10); // Reset on MR3: the TC will be reset if MR3 matches it.
-	LPC_TMR16B0->PR = 5; // The 16-bit Prescale Register specifies the maximum value for the Prescale Counter.
+	LPC_TMR16B0->PR = 10; // The 16-bit Prescale Register specifies the maximum value for the Prescale Counter.
 	LPC_TMR16B0->PC = 2; // Prescale Counter register
 	/* Count Control Register (TMR16B0TCR - Start Timer16B0 p.329 in UM */
 	LPC_TMR16B0->TCR = 1;// |= (1<<1);
@@ -101,13 +105,23 @@ void playNote(uint8_t note) {
 }
 
 void beatLight() {
+	if (ClockTickCnt == 0) {
 	LPC_TMR16B0->MR0 = 65000; // (65000 / 1000) = 65
 	LPC_TMR16B0->MR1 = 65000;
+	LPC_TMR16B0->MR2 = 65000;
+	}
+	ClockTickCnt++;
+	if (ClockTickCnt == 24) {LPC_TMR16B0->MR0 = 65000;}
+	if (ClockTickCnt == 48) {LPC_TMR16B0->MR1 = 65000;}
+	if (ClockTickCnt == 72) {LPC_TMR16B0->MR2 = 65000;}
+	if (ClockTickCnt == 96) {ClockTickCnt = 0;}
+
 }
 
 void beatLightOff() {
 	LPC_TMR16B0->MR0 = 0; // (65000 / 1000) = 65
 	LPC_TMR16B0->MR1 = 0;
+	LPC_TMR16B0->MR2 = 0;
 }
 
 
@@ -138,10 +152,10 @@ int main(void) {
 				case 0xfa:
 					LPC_GPIO0->DATA ^= (1<<3); /* toggle GPIOX_X */
 					UARTSend( (uint8_t *)UARTBuffer, 1 );
-					beatLight();
 					UARTCount--;
 				  break;
 				case 0xf8:
+					beatLight();
 					LPC_GPIO0->DATA ^= (1<<3); /* toggle GPIOX_X */
 					UARTSend( (uint8_t *)UARTBuffer, 1 );
 					UARTCount--;
