@@ -3,7 +3,7 @@
  * (C) Code Red Technologies Ltd, 2008-2012
  * Linker script memory definitions
  * Created from LinkMemoryTemplate
- * By LPCXpresso v4.2.4 [Build 267] [2012-07-11]  on Tue Sep 04 15:04:01 CDT 2012)
+ * By LPCXpresso v4.2.4 [Build 267] [2012-07-11]  on Wed Sep 05 00:09:57 CDT 2012)
 */
 
 MEMORY
