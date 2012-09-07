@@ -28,8 +28,6 @@ Discarded input sections
                 0x0000000000000000        0xc ./main.o
  .bss.Timer16B0TickCnt
                 0x0000000000000000        0x4 ./main.o
- .bss.PWMTickCnt
-                0x0000000000000000        0x4 ./main.o
  .text          0x0000000000000000        0x0 ./drivers/uart.o
  .data          0x0000000000000000        0x0 ./drivers/uart.o
  .bss           0x0000000000000000        0x0 ./drivers/uart.o
@@ -79,7 +77,7 @@ END GROUP
                 0x0000000000008000                __top_MFlash32 = 0x8000
                 0x0000000010001000                __top_RamLoc4 = 0x10001000
 
-.text           0x0000000000000000      0x860
+.text           0x0000000000000000      0x868
  FILL mask 0xff
  *(.isr_vector)
  .isr_vector    0x0000000000000000       0xc0 ./cr_startup_lpc11.o
@@ -87,13 +85,13 @@ END GROUP
                 0x00000000000000c0                . = ALIGN (0x4)
                 0x00000000000000c0                __section_table_start = .
                 0x00000000000000c0                __data_section_table = .
-                0x00000000000000c0        0x4 LONG 0x860 LOADADDR (.data)
+                0x00000000000000c0        0x4 LONG 0x868 LOADADDR (.data)
                 0x00000000000000c4        0x4 LONG 0x10000000 ADDR (.data)
                 0x00000000000000c8        0x4 LONG 0x8 SIZEOF (.data)
                 0x00000000000000cc                __data_section_table_end = .
                 0x00000000000000cc                __bss_section_table = .
                 0x00000000000000cc        0x4 LONG 0x10000008 ADDR (.bss)
-                0x00000000000000d0        0x4 LONG 0x58 SIZEOF (.bss)
+                0x00000000000000d0        0x4 LONG 0x5c SIZEOF (.bss)
                 0x00000000000000d4                __bss_section_table_end = .
                 0x00000000000000d4                __section_table_end = .
  *(.after_vectors*)
@@ -115,6 +113,7 @@ END GROUP
                 0x0000000000000150                PIOINT0_IRQHandler
                 0x0000000000000150                I2C_IRQHandler
                 0x0000000000000150                WDT_IRQHandler
+                0x0000000000000150                TIMER16_0_IRQHandler
                 0x0000000000000150                PIOINT3_IRQHandler
                 0x0000000000000150                TIMER32_0_IRQHandler
                 0x0000000000000150                TIMER32_1_IRQHandler
@@ -132,75 +131,72 @@ END GROUP
                 0x0000000000000001                ASSERT (! ((__CRP_WORD_START__ == __CRP_WORD_END__)), Linker CRP Enabled, but no CRP_WORD provided within application)
  *(.text*)
  .text.SysTick_Handler
-                0x0000000000000300       0x10 ./main.o
+                0x0000000000000300       0x8c ./main.o
                 0x0000000000000300                SysTick_Handler
- .text.TIMER16_0_IRQHandler
-                0x0000000000000310       0x84 ./main.o
-                0x0000000000000310                TIMER16_0_IRQHandler
- .text.LEDinit  0x0000000000000394       0x30 ./main.o
-                0x0000000000000394                LEDinit
+ .text.LEDinit  0x000000000000038c       0x30 ./main.o
+                0x000000000000038c                LEDinit
  .text.TMR16init
-                0x00000000000003c4       0x70 ./main.o
-                0x00000000000003c4                TMR16init
+                0x00000000000003bc       0x60 ./main.o
+                0x00000000000003bc                TMR16init
  .text.beatLight
-                0x0000000000000434       0x6c ./main.o
-                0x0000000000000434                beatLight
+                0x000000000000041c       0x6c ./main.o
+                0x000000000000041c                beatLight
  .text.startup.main
-                0x00000000000004a0       0xe4 ./main.o
-                0x00000000000004a0                main
+                0x0000000000000488       0xe4 ./main.o
+                0x0000000000000488                main
  .text.UART_IRQHandler
-                0x0000000000000584       0x9c ./drivers/uart.o
-                0x0000000000000584                UART_IRQHandler
+                0x000000000000056c       0x9c ./drivers/uart.o
+                0x000000000000056c                UART_IRQHandler
  .text.UARTInit
-                0x0000000000000620       0xcc ./drivers/uart.o
-                0x0000000000000620                UARTInit
+                0x0000000000000608       0xcc ./drivers/uart.o
+                0x0000000000000608                UARTInit
  .text.UARTSend
-                0x00000000000006ec       0x24 ./drivers/uart.o
-                0x00000000000006ec                UARTSend
+                0x00000000000006d4       0x24 ./drivers/uart.o
+                0x00000000000006d4                UARTSend
  .text.SystemInit
-                0x0000000000000710       0x90 /Users/patrick/Documents/workspace_expresso/CMSISv2p00_LPC11xx/Release/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
-                0x0000000000000710                SystemInit
+                0x00000000000006f8       0x90 /Users/patrick/Documents/workspace_expresso/CMSISv2p00_LPC11xx/Release/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
+                0x00000000000006f8                SystemInit
  .text.__weak_main
-                0x00000000000007a0        0x8 /Applications/lpcxpresso_4.2.4_267/lpcxpresso/Tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(__weak__main.o)
-                0x00000000000007a0                __main
-                0x00000000000007a0                __weak_main
+                0x0000000000000788        0x8 /Applications/lpcxpresso_4.2.4_267/lpcxpresso/Tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(__weak__main.o)
+                0x0000000000000788                __main
+                0x0000000000000788                __weak_main
  .text.__aeabi_division_uidivmod
-                0x00000000000007a8       0x72 /Applications/lpcxpresso_4.2.4_267/lpcxpresso/Tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(division.o)
-                0x00000000000007a8                __aeabi_uidiv
-                0x00000000000007a8                __aeabi_uidivmod
+                0x0000000000000790       0x72 /Applications/lpcxpresso_4.2.4_267/lpcxpresso/Tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(division.o)
+                0x0000000000000790                __aeabi_uidiv
+                0x0000000000000790                __aeabi_uidivmod
  .text.__aeabi_division_idiv0
-                0x000000000000081a        0x2 /Applications/lpcxpresso_4.2.4_267/lpcxpresso/Tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(division.o)
-                0x000000000000081a                __aeabi_idiv0
+                0x0000000000000802        0x2 /Applications/lpcxpresso_4.2.4_267/lpcxpresso/Tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(division.o)
+                0x0000000000000802                __aeabi_idiv0
  *(.rodata .rodata.*)
- .rodata.LEDcurve
-                0x000000000000081c       0x44 ./main.o
-                0x0000000000000860                . = ALIGN (0x4)
+ .rodata.LEDcurveBIG
+                0x0000000000000804       0x64 ./main.o
+                0x0000000000000868                . = ALIGN (0x4)
 
-.glue_7         0x0000000000000860        0x0
+.glue_7         0x0000000000000868        0x0
  .glue_7        0x0000000000000000        0x0 linker stubs
 
-.glue_7t        0x0000000000000860        0x0
+.glue_7t        0x0000000000000868        0x0
  .glue_7t       0x0000000000000000        0x0 linker stubs
 
-.vfp11_veneer   0x0000000000000860        0x0
+.vfp11_veneer   0x0000000000000868        0x0
  .vfp11_veneer  0x0000000000000000        0x0 linker stubs
 
-.v4_bx          0x0000000000000860        0x0
+.v4_bx          0x0000000000000868        0x0
  .v4_bx         0x0000000000000000        0x0 linker stubs
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x0000000000000860                __exidx_start = .
+                0x0000000000000868                __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x0000000000000860                __exidx_end = .
-                0x0000000000000860                _etext = .
+                0x0000000000000868                __exidx_end = .
+                0x0000000000000868                _etext = .
 
 .uninit_RESERVED
  *(.bss.$RESERVED*)
 
-.data           0x0000000010000000        0x8 load address 0x0000000000000860
+.data           0x0000000010000000        0x8 load address 0x0000000000000868
  FILL mask 0xff
                 0x0000000010000000                _data = .
  *(vtable)
@@ -215,47 +211,50 @@ END GROUP
                 0x0000000010000008                . = ALIGN (0x4)
                 0x0000000010000008                _edata = .
 
-.bss            0x0000000010000008       0x58 load address 0x0000000000000868
+.bss            0x0000000010000008       0x5c load address 0x0000000000000870
                 0x0000000010000008                _bss = .
  *(.bss*)
  .bss.LED1      0x0000000010000008        0x2 ./main.o
                 0x0000000010000008                LED1
  .bss.LED2      0x000000001000000a        0x2 ./main.o
                 0x000000001000000a                LED2
- .bss.SysTickCnt
+ .bss.PWMTickCnt
                 0x000000001000000c        0x4 ./main.o
-                0x000000001000000c                SysTickCnt
- .bss.ClockTickCnt
+                0x000000001000000c                PWMTickCnt
+ .bss.SysTickCnt
                 0x0000000010000010        0x4 ./main.o
-                0x0000000010000010                ClockTickCnt
- .bss.LED0      0x0000000010000014        0x2 ./main.o
-                0x0000000010000014                LED0
- *fill*         0x0000000010000016        0x2 00
+                0x0000000010000010                SysTickCnt
+ .bss.ClockTickCnt
+                0x0000000010000014        0x4 ./main.o
+                0x0000000010000014                ClockTickCnt
+ .bss.LED0      0x0000000010000018        0x2 ./main.o
+                0x0000000010000018                LED0
+ *fill*         0x000000001000001a        0x2 00
  .bss.UARTCount
-                0x0000000010000018        0x4 ./drivers/uart.o
-                0x0000000010000018                UARTCount
+                0x000000001000001c        0x4 ./drivers/uart.o
+                0x000000001000001c                UARTCount
  *(COMMON)
- COMMON         0x000000001000001c       0x44 ./drivers/uart.o
-                0x000000001000001c                UARTBuffer
-                0x000000001000005c                UARTStatus
-                0x0000000010000060                . = ALIGN (0x4)
-                0x0000000010000060                _ebss = .
-                0x0000000010000060                PROVIDE (end, .)
-                0x0000000010000060                PROVIDE (_pvHeapStart, .)
+ COMMON         0x0000000010000020       0x44 ./drivers/uart.o
+                0x0000000010000020                UARTBuffer
+                0x0000000010000060                UARTStatus
+                0x0000000010000064                . = ALIGN (0x4)
+                0x0000000010000064                _ebss = .
+                0x0000000010000064                PROVIDE (end, .)
+                0x0000000010000064                PROVIDE (_pvHeapStart, .)
                 0x0000000010001000                PROVIDE (_vStackTop, (__top_RamLoc4 - 0x0))
 OUTPUT(hello.axf elf32-littlearm)
 
-.debug_info     0x0000000000000000     0x2531
+.debug_info     0x0000000000000000     0x251f
  .debug_info    0x0000000000000000      0x292 ./cr_startup_lpc11.o
- .debug_info    0x0000000000000292     0x1117 ./main.o
- .debug_info    0x00000000000013a9      0xc8a ./drivers/uart.o
- .debug_info    0x0000000000002033      0x4fe /Users/patrick/Documents/workspace_expresso/CMSISv2p00_LPC11xx/Release/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
+ .debug_info    0x0000000000000292     0x1105 ./main.o
+ .debug_info    0x0000000000001397      0xc8a ./drivers/uart.o
+ .debug_info    0x0000000000002021      0x4fe /Users/patrick/Documents/workspace_expresso/CMSISv2p00_LPC11xx/Release/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
 
-.debug_abbrev   0x0000000000000000      0x683
+.debug_abbrev   0x0000000000000000      0x663
  .debug_abbrev  0x0000000000000000      0x114 ./cr_startup_lpc11.o
- .debug_abbrev  0x0000000000000114      0x2a9 ./main.o
- .debug_abbrev  0x00000000000003bd      0x1dc ./drivers/uart.o
- .debug_abbrev  0x0000000000000599       0xea /Users/patrick/Documents/workspace_expresso/CMSISv2p00_LPC11xx/Release/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
+ .debug_abbrev  0x0000000000000114      0x289 ./main.o
+ .debug_abbrev  0x000000000000039d      0x1dc ./drivers/uart.o
+ .debug_abbrev  0x0000000000000579       0xea /Users/patrick/Documents/workspace_expresso/CMSISv2p00_LPC11xx/Release/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
 
 .debug_loc      0x0000000000000000      0x547
  .debug_loc     0x0000000000000000      0x28f ./cr_startup_lpc11.o
@@ -263,36 +262,36 @@ OUTPUT(hello.axf elf32-littlearm)
  .debug_loc     0x000000000000038a      0x125 ./drivers/uart.o
  .debug_loc     0x00000000000004af       0x98 /Users/patrick/Documents/workspace_expresso/CMSISv2p00_LPC11xx/Release/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
 
-.debug_aranges  0x0000000000000000      0x120
+.debug_aranges  0x0000000000000000      0x118
  .debug_aranges
                 0x0000000000000000       0x60 ./cr_startup_lpc11.o
  .debug_aranges
-                0x0000000000000060       0x60 ./main.o
+                0x0000000000000060       0x58 ./main.o
  .debug_aranges
-                0x00000000000000c0       0x38 ./drivers/uart.o
+                0x00000000000000b8       0x38 ./drivers/uart.o
  .debug_aranges
-                0x00000000000000f8       0x28 /Users/patrick/Documents/workspace_expresso/CMSISv2p00_LPC11xx/Release/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
+                0x00000000000000f0       0x28 /Users/patrick/Documents/workspace_expresso/CMSISv2p00_LPC11xx/Release/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
 
-.debug_ranges   0x0000000000000000      0x110
+.debug_ranges   0x0000000000000000      0x108
  .debug_ranges  0x0000000000000000       0x50 ./cr_startup_lpc11.o
- .debug_ranges  0x0000000000000050       0x80 ./main.o
- .debug_ranges  0x00000000000000d0       0x28 ./drivers/uart.o
- .debug_ranges  0x00000000000000f8       0x18 /Users/patrick/Documents/workspace_expresso/CMSISv2p00_LPC11xx/Release/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
+ .debug_ranges  0x0000000000000050       0x78 ./main.o
+ .debug_ranges  0x00000000000000c8       0x28 ./drivers/uart.o
+ .debug_ranges  0x00000000000000f0       0x18 /Users/patrick/Documents/workspace_expresso/CMSISv2p00_LPC11xx/Release/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
 
-.debug_line     0x0000000000000000      0x6b2
+.debug_line     0x0000000000000000      0x68f
  .debug_line    0x0000000000000000       0xa0 ./cr_startup_lpc11.o
- .debug_line    0x00000000000000a0      0x291 ./main.o
- .debug_line    0x0000000000000331      0x1ff ./drivers/uart.o
- .debug_line    0x0000000000000530      0x182 /Users/patrick/Documents/workspace_expresso/CMSISv2p00_LPC11xx/Release/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
+ .debug_line    0x00000000000000a0      0x26e ./main.o
+ .debug_line    0x000000000000030e      0x1ff ./drivers/uart.o
+ .debug_line    0x000000000000050d      0x182 /Users/patrick/Documents/workspace_expresso/CMSISv2p00_LPC11xx/Release/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
 
-.debug_str      0x0000000000000000      0xae7
+.debug_str      0x0000000000000000      0xae8
  .debug_str     0x0000000000000000      0x204 ./cr_startup_lpc11.o
                                         0x22c (size before relaxing)
- .debug_str     0x0000000000000204      0x7b2 ./main.o
-                                        0x8df (size before relaxing)
- .debug_str     0x00000000000009b6       0xa3 ./drivers/uart.o
+ .debug_str     0x0000000000000204      0x7a4 ./main.o
+                                        0x8d1 (size before relaxing)
+ .debug_str     0x00000000000009a8       0xb2 ./drivers/uart.o
                                         0x7ee (size before relaxing)
- .debug_str     0x0000000000000a59       0x8e /Users/patrick/Documents/workspace_expresso/CMSISv2p00_LPC11xx/Release/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
+ .debug_str     0x0000000000000a5a       0x8e /Users/patrick/Documents/workspace_expresso/CMSISv2p00_LPC11xx/Release/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
                                         0x3e6 (size before relaxing)
 
 .comment        0x0000000000000000       0x9a
@@ -319,8 +318,8 @@ OUTPUT(hello.axf elf32-littlearm)
  .ARM.attributes
                 0x00000000000000ff       0x23 /Applications/lpcxpresso_4.2.4_267/lpcxpresso/Tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(division.o)
 
-.debug_frame    0x0000000000000000      0x274
+.debug_frame    0x0000000000000000      0x264
  .debug_frame   0x0000000000000000       0xec ./cr_startup_lpc11.o
- .debug_frame   0x00000000000000ec       0xcc ./main.o
- .debug_frame   0x00000000000001b8       0x78 ./drivers/uart.o
- .debug_frame   0x0000000000000230       0x44 /Users/patrick/Documents/workspace_expresso/CMSISv2p00_LPC11xx/Release/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
+ .debug_frame   0x00000000000000ec       0xbc ./main.o
+ .debug_frame   0x00000000000001a8       0x78 ./drivers/uart.o
+ .debug_frame   0x0000000000000220       0x44 /Users/patrick/Documents/workspace_expresso/CMSISv2p00_LPC11xx/Release/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)

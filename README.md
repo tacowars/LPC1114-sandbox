@@ -9,6 +9,10 @@ NXP LPC1114-school
 - tried tuning frequency to just over 100HZ, no good.
 - Is it the clock?
 
+its not the LEDs; oothers do it. 
+Its not the different timers because I've elimitated the systick and timer functions
+Voltage or current related? not power supply; tried lipo w/ higher voltage.
+
 
 
 MIDI Monitor with Python
